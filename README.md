@@ -20,7 +20,7 @@ Related platform: the **ByByte Nano** educational robot ([ByByteNano repository]
 - **Low-resolution LED matrix display:** easy to reason about pixels, coordinates, and arrays
 - **Secondary 7-segment display:** scores, timers, levels, counters
 - **Open hardware:** schematic and PCB sources included in this repository
-- **Open firmware:** Arduino Nano (ATmega328) and the companion **nanoBoy** library in `source/nanoBoy/`
+- **Programmable firmware:** Arduino Nano (ATmega328); sketches in the **Arduino IDE**. Official ByByte **Arduino libraries and examples** for nanoBoy (and other kits) live in **[ByByteLib](https://github.com/ByByte-diy/ByByteLib)**; you can still use additional community libraries (for example MAX7219 or TM1637) where needed, with wiring that matches this PCB.
 
 ---
 
@@ -48,7 +48,6 @@ Typical games and demos: Snake, Tetris, Pong, racing, Arkanoid, simple pixel ani
 | `hardware/schematics/SCH_top_board.pdf` | Front / top panel schematic |
 | `hardware/pcb/PCB_main_board.pdf` | Main board PCB |
 | `hardware/pcb/PCB_top_board.pdf` | Front / top panel PCB |
-| `source/nanoBoy/` | Arduino **nanoBoy** library (`library.properties`, `src/`, `examples/`) |
 
 Board renderings or photos can be placed under `img/` (for example `img/3D_main_board_pcb_1.png`).
 
@@ -57,8 +56,8 @@ Board renderings or photos can be placed under `img/` (for example `img/3D_main_
 ## Software
 
 - Use the **Arduino IDE** (or compatible toolchain) targeting **Arduino Nano** / ATmega328P.
-- Install the bundled library by copying `source/nanoBoy` into your Arduino `libraries` folder, or use **Sketch - Include Library - Add .ZIP Library** (zip the `nanoBoy` folder so `library.properties` is at the root of the archive).
-- Start from **`examples/BareMinimum`** and replace stubs with your game code.
+- Install **ByByte firmware libraries** from **[ByByteLib](https://github.com/ByByte-diy/ByByteLib)** (copy the library folders into your Arduino `libraries` directory, or add a release ZIP via **Sketch - Include Library - Add .ZIP Library**, as described there).
+- Write your own sketches or adapt the examples from that repo; match **pin assignments** to the schematic and board labels. Until a dedicated nanoBoy layer is published, you may combine **ByByteLib** with common drivers (MAX7219 matrix, TM1637, and your own button / analog code) as needed.
 
 Educational progression the kit is designed around:
 
@@ -96,7 +95,7 @@ Refer to the PDFs under `hardware/` for exact nets, connectors, and part labels.
 ## Troubleshooting
 
 - **No display:** check MAX7219 **power**, **SPI-like wiring** (DIN, CLK, CS or LOAD per your routing), and module chain order.
-- **TM1637 blank:** clock and data pins and 5 V; library pin definitions must match the PCB.
+- **TM1637 blank:** clock and data pins and 5 V; your sketch’s pin definitions must match the PCB.
 - **No USB upload:** correct **board** and **port**; try another USB cable.
 - **Odd analog readings:** common ground, reference voltage, pot wiring.
 - **Noise on rails:** short leads, solid ground, adequate decoupling as per schematic.
@@ -109,7 +108,7 @@ Contributions are welcome:
 
 1. Open an **issue** for bugs, documentation gaps, or lesson ideas
 2. Improve examples and teaching notes
-3. Fork, branch, and open a **pull request** for hardware or library changes
+3. Fork, branch, and open a **pull request** for hardware, firmware examples, or documentation
 
 ---
 
